@@ -14,16 +14,16 @@ import java.util.Date;
 @AllArgsConstructor
 public class Employee {
 
-    @NotNull
+    @NotEmpty
     @Size(min = 2, max = 4)
     private String id;
 
-    @NotNull
+    @NotEmpty
     @Size(min = 4, max = 12)
     @Pattern(regexp="^[A-Za-z]*$",message = "Invalid Input")
     private String name;
 
-    //@Email
+    @Email
     private String email;
 
     @Pattern(regexp = "^05\\d{8}$", message = "Phone number must start with '05' and be exactly 10 digits")
@@ -35,14 +35,14 @@ public class Employee {
     @Size(min = 25, max = 150)
     private int age;
 
-    //@NotNull
+    @NotEmpty
     @Pattern(regexp = "^(supervisor|coordinator)$", message = "only supervisor and coordinator position are allowed")
     private String position;
     private boolean onLeave = false;
 
-    @NotNull
-    @JsonFormat(pattern = "yyyy/MM/dd")
-    private String hireDate;
+    @NotEmpty
+    @DateTimeFormat( pattern = "yyyy/MM/dd")
+    private LocalDate hireDate;
 
     @NotNull
     @Positive
