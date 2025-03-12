@@ -46,20 +46,15 @@ public class EmployeeController {
         employees.remove(index);
         return ResponseEntity.status(200).body(new ApiResponse("Employee deleted successfully"));
     }
-    @GetMapping("search/{position}")
-    public ArrayList<Employee> searchEmployees(@PathVariable String position, Errors errors){
-        ArrayList<Employee> supervisors = new ArrayList<>();
-        ArrayList<Employee> coordinators = new ArrayList<>();
-
-            for(Employee e : employees) {
-                if(position.equalsIgnoreCase("supervisor")) {
-                    supervisors.add(e);
-                    return supervisors;
-                } else if(position.equalsIgnoreCase("coordinator"))
-                    coordinators.add(e);
-                    return coordinators;
+   @GetMapping("/search/{position}")
+    public ArrayList<Employee> searchEmployees(@PathVariable String position) {
+        ArrayList<Employee> result = new ArrayList<>();
+        for (Employee e : employees) {
+            if (e.getPosition().equalsIgnoreCase(position)) {
+                result.add(e);
+            }
         }
-           return null;
+        return result;
     }
     @GetMapping("/range/{minAge}/{maxAge}")
     public ArrayList<Employee> getEmployeeAgeRange(@PathVariable int minAge,@PathVariable int maxAge) {
